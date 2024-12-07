@@ -1,32 +1,18 @@
-from flask import Flask
-from flask import request
+from api.v1.routes import v1_blueprint
+from flask import Flask, jsonify, request
+
 
 app = Flask(__name__)
 
-@app.post("/comment-analysis")
-def analyze_comment():
-    return f''
+
+app.register_blueprint(v1_blueprint)
 
 
-@app.get("/comments")
-def get_all_comments():
-    return f''
+@app.before_request
+def handle_versioning():
+    api_version = request.headers.get("API-Version", "v1")
 
-
-@app.route("comments/{id}", methods=['GET', 'DELETE', 'PUT'])
-def comments():
-    if request.method == 'POST':
-        pass
-    if request.method == 'DELETE':
-        pass
-    if request.method == 'PUT':
-        pass
-
-
-# POST /comment-analysis - Classifies a single comment using ChatGPT 
-# GET /comments Retrieves all classified comments.
-# GET /comments/{id} Retrieves a single classified comment by its ID.
-# DELETE /comments/{id}  Deletes a classified comment by its ID.
-# PUT /comments/{id} Updates a previously classified comment by its ID.
-
-
+    if api_version == "v1":
+        request.url_rule.rule = f"/v1{request.url_rule.rule}"
+    else:
+        return jsonify({"error": "Invalid API version"}), 400
