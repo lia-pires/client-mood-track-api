@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 
-from client_mood_track_api.utils import CommentProcessor, TwilioHandler
+from client_mood_track_api.utils import CommentProcessor
+from client_mood_track_api.twilio import TwilioHandler
 
 v1_blueprint = Blueprint("v1", __name__)
 
