@@ -1,6 +1,14 @@
 import os
 
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
 TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
 TWILIO_CONTENT_SID = os.getenv("TWILIO_CONTENT_SID")
 TWILIO_FROM_WHATSAPP = os.getenv("TWILIO_FROM_WHATSAPP")
+OPENAI_ORGANIZATION_ID = os.getenv("OPENAI_ORGANIZATION_ID")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+PROMPT_OPENAI = os.getenv("PROMPT_OPENAI")

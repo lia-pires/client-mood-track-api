@@ -1,5 +1,7 @@
 import json
 
+from client_mood_track_api.openai import OpenAi
+
 
 class CommentProcessor:
 
@@ -7,15 +9,12 @@ class CommentProcessor:
         self.data = data
 
     def process_comment(self):
+        openai = OpenAi()
         print("Processing comment...")
-        data = self.analyze_comment_ai()
-        # send to db
         try:
+            analyzed_data = openai.analyze_comment_ai(self.data)
+            # implement mongodb
             return True
+
         except:
             return False
-
-    def analyze_comment_ai(self):
-        user_name = self.data.get("userName")
-        print(f"Analyzing {user_name}`s comment")
-        # implement chat gpt api
